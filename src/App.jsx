@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-const PASSWORD = "pro2026";
+const PASSWORD = "con2026";
 
 function PasswordGate({ children }) {
-  const [authed, setAuthed] = useState(() => sessionStorage.getItem("cgp_auth") === "1");
+  const [authed, setAuthed] = useState(() => sessionStorage.getItem("cc_auth") === "1");
   const [input, setInput] = useState("");
   const [error, setError] = useState(false);
 
@@ -12,7 +12,7 @@ function PasswordGate({ children }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (input === PASSWORD) {
-      sessionStorage.setItem("cgp_auth", "1");
+      sessionStorage.setItem("cc_auth", "1");
       setAuthed(true);
     } else {
       setError(true);
@@ -23,7 +23,7 @@ function PasswordGate({ children }) {
   return (
     <div style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "100vh", background: "#060f1a" }}>
       <div style={{ background: "#091929", border: "1px solid #1e3a5f", borderRadius: 12, padding: "40px 48px", minWidth: 320, textAlign: "center" }}>
-        <div style={{ fontSize: 22, fontWeight: 700, color: "#fff", marginBottom: 8 }}>Common Ground Project Dashboard</div>
+        <div style={{ fontSize: 22, fontWeight: 700, color: "#fff", marginBottom: 8 }}>Carmela Conroy Dashboard</div>
         <div style={{ fontSize: 14, color: "#64748b", marginBottom: 24 }}>Enter password to continue</div>
         <form onSubmit={handleSubmit}>
           <input type="password" value={input} onChange={(e) => { setInput(e.target.value); setError(false); }}
@@ -39,7 +39,7 @@ function PasswordGate({ children }) {
 
 // ─── CLIENT CONFIG ────────────────────────────────────────────────────────────
 const CLIENT = {
-  name: "Common Ground Project",
+  name: "Carmela Conroy",
   cycle: "2025–2026",
   lastUpdated: "April 14, 2026",
   reportWeek: "Current Week",
@@ -112,28 +112,99 @@ const LIST_SIZE = [
 ];
 
 // ─── FINANCES ─────────────────────────────────────────────────────────────────
-const FINANCES = [];
+const FINANCES = [
+  {
+    "period": "2025-11",
+    "type": "month",
+    "totalActBlue": 6696.0,
+    "digitalRaise": 2750.0
+  },
+  {
+    "period": "2025-12",
+    "type": "month",
+    "totalActBlue": 17620.0,
+    "digitalRaise": 7838.0
+  },
+  {
+    "period": "2026-01",
+    "type": "month",
+    "totalActBlue": 14110.0,
+    "digitalRaise": 4204.0
+  },
+  {
+    "period": "2026-02",
+    "type": "month",
+    "totalActBlue": 22744.2,
+    "digitalRaise": 4190.0
+  },
+  {
+    "period": "2026-03",
+    "type": "month",
+    "totalActBlue": 19524.26,
+    "digitalRaise": 8082.0
+  },
+  {
+    "period": "2026-04",
+    "type": "month",
+    "totalActBlue": 5119.26,
+    "digitalRaise": 884.0
+  }
+];
 const DIGITAL_PCT_MIN = 10;
 const DIGITAL_PCT_MAX = 15;
 
 const FINANCE_MONTHLY = {
   period: "April 2026",
-  totalActBlue: 0,
-  digitalRaise: 0,
-  projection: 0,
+  totalActBlue: 5119.26,
+  digitalRaise: 884.0,
+  projection: 14302,
 };
 const FINANCE_QUARTERLY = {
   period: "Q2 2026",
-  totalActBlue: 0,
-  digitalRaise: 0,
-  projection: 0,
+  totalActBlue: 85813.72,
+  digitalRaise: 27948.0,
+  projection: 98686,
 };
 
 // ─── ACQUISITION ROI ──────────────────────────────────────────────────────────
 const ACQUISITION_ROI = [];
 
 // ─── TEXTING ROI ──────────────────────────────────────────────────────────────
-const TEXTING_ROI = [];
+const TEXTING_ROI = [
+  {
+    "campaign": "Campaign Name",
+    "sendDate": "Send Date",
+    "period": "weekly",
+    "sent": 0,
+    "delivered": 0,
+    "responses": 0,
+    "optOuts": 0,
+    "donations": 0,
+    "raised": 0.0
+  },
+  {
+    "campaign": "CC_EOQ FR_260331",
+    "sendDate": "2026-03-31",
+    "period": "weekly",
+    "sent": 0,
+    "delivered": 0,
+    "responses": 6419,
+    "optOuts": 0,
+    "donations": 0,
+    "raised": 5219.0
+  },
+  {
+    "campaign": "TOTALS",
+    "sendDate": "",
+    "period": "weekly",
+    "sent": 0,
+    "delivered": 0,
+    "responses": 0,
+    "optOuts": 0,
+    "donations": 0,
+    "raised": 0.0
+  }
+];
 
 // ─── ADS ──────────────────────────────────────────────────────────────────────
 const META_ADS = [];
@@ -143,14 +214,14 @@ const GOOGLE_ADS = [];
 const GROWTH_CALC = [
   { metric: "Avg Open Rate", value: "0.0%", benchmark: ">14% = Strong", status: "below" },
   { metric: "Avg Click Rate", value: "0.0%", benchmark: ">3.0%", status: "below" },
-  { metric: "Digital % of ActBlue", value: "0.0%", benchmark: "10–15%", status: "below" },
+  { metric: "Digital % of ActBlue", value: "32.6%", benchmark: "10–15%", status: "above" },
 ];
 
 const DEFAULT_HIGHLIGHTS = [
   "Dashboard initialized with data through April 14, 2026",
-  "Digital raise: $0 (0.0% of total ActBlue)",
+  "Digital raise: $27,948 (32.6% of total ActBlue)",
   "Average email open rate: 0.0%",
-  "Total ActBlue raised: $0",
+  "Total ActBlue raised: $85,814",
 ];
 
 // ─── HELPERS ──────────────────────────────────────────────────────────────────
@@ -385,7 +456,7 @@ export default function Dashboard() {
 
         <header style={{ position: "sticky", top: 0, zIndex: 100, background: "rgba(6,15,26,0.96)", backdropFilter: "blur(12px)", borderBottom: "1px solid #1e3a5f", padding: "0 32px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 64 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-            <div style={{ width: 36, height: 36, borderRadius: 8, background: "linear-gradient(135deg,#1d4ed8,#3b82f6)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15, fontWeight: 800, fontFamily: "'Sora', sans-serif", color: "#fff" }}>{"CG"}</div>
+            <div style={{ width: 36, height: 36, borderRadius: 8, background: "linear-gradient(135deg,#1d4ed8,#3b82f6)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15, fontWeight: 800, fontFamily: "'Sora', sans-serif", color: "#fff" }}>{"CC"}</div>
             <div>
               <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: 15, color: "#e2e8f0", lineHeight: 1.1 }}>{CLIENT.name}</div>
               <div style={{ fontSize: 11, color: "#475569", letterSpacing: "0.06em" }}>{CLIENT.cycle} CAMPAIGN REPORT</div>
